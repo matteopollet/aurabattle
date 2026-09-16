@@ -1,0 +1,5 @@
+node_modules
+dist
+# assets MediaPipe téléchargés par le postinstall (scripts/setup-assets.mjs)
+public/models/
+public/mediapipe-wasm/
