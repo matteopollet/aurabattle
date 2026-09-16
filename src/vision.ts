@@ -50,16 +50,17 @@ export class VisionEngine {
   loaded = false;
 
   async load(): Promise<void> {
+    const base = import.meta.env.BASE_URL; // '/' en dev, '/aurabattle/' sur GitHub Pages
     let fileset;
     try {
-      fileset = await FilesetResolver.forVisionTasks('/mediapipe-wasm');
+      fileset = await FilesetResolver.forVisionTasks(`${base}mediapipe-wasm`);
     } catch {
       fileset = await FilesetResolver.forVisionTasks(
         'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/wasm',
       );
     }
     const mk = (model: string, delegate: 'GPU' | 'CPU') => ({
-      baseOptions: { modelAssetPath: `/models/${model}`, delegate },
+      baseOptions: { modelAssetPath: `${base}models/${model}`, delegate },
       runningMode: 'VIDEO' as const,
     });
     try {
